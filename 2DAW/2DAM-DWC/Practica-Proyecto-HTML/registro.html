@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+
+    <form action="login.html" method="post">
+
+        <fieldset>
+
+            <legend>
+                <h1>Formulario de Registro</h1>
+            </legend>
+        
+            <div>
+                <label>Nombre: </label>
+                <input type="text" name="Nombre" placeholder="Introduce el nombre"/>
+            </div>
+    
+            <div>
+                <label>Apellidos: </label>
+                <input type="text" name="Apellidos" placeholder="Introduce los apellidos"/>
+            </div>
+    
+            <div>
+                <label>Email: </label>
+                <input type="email" name="Email" placeholder="Introduce el email" required/>
+            </div>
+    
+            <div>
+                <label>Contraseña: </label>
+                <input type="password" name="Contraseña" placeholder="Introduce la contraseña" required/>
+            </div>
+    
+            <div>
+                <label>Teléfono: </label>
+                <input type="tel" name="Telefono" placeholder="Introduce el teléfono"/>
+            </div>
+    
+            <div>
+                <label>Sexo: </label>
+
+                <label for="Hombre">Hombre</label>
+                <input type="radio" name="Sexo" id="Hombre" value="Hombre"/>    
+            
+                <label for="Mujer">Mujer</label>
+                <input type="radio" name="Sexo" id="Mujer" value="Mujer"/>
+                
+            </div>
+
+            <div>
+                <button type="submit">Registrarme</button>
+            </div>
+    
+        </fieldset>
+
+    </form>
+
+    <div>
+        <label>Ya tienes una cuenta?</label>
+        <a href="login.html"><button>Login</button></a>
+    </div>
+
+    <br>
+
+    <div>
+        <a href="lista-enlaces.html"><button>Regresar a lista de enlaces</button></a>
+    </div>
+    
+</body>
+</html>

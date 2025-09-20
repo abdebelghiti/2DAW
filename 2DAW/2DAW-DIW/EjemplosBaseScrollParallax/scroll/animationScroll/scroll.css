@@ -1,0 +1,50 @@
+body{
+    line-height: 1.5;
+    font-family: sans-serif;
+    font-size: clamp(1.125rem, 2vm, 1.25rem);
+}
+
+h1 {
+    font-size: 3em;
+    margin: 40rem 0rem;
+    text-align: center;
+}
+
+p, li {
+    animation: fade linear both;
+    animation-timeline: view();
+    animation-range: entry 50% cover 50%;
+}
+
+h2 {
+    background: linear-gradient(90deg, black, transparent);
+    background-size: 200%;
+    animation: reveal linear both;
+    animation-timeline: view();
+    background-repeat: no-repeat;
+    animation-range: entry 50% cover 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes reveal {
+    from {
+        background-position-x: 0%;
+    }
+
+    to {
+        background-position-x: 0%;
+    }
+}
+

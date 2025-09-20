@@ -1,0 +1,139 @@
+body {
+    font-family: Arial;
+    background: linear-gradient(180deg, #0d0d0d, #1a1a1a);
+    color: ghostwhite;
+    margin: 2%;
+    line-height: 1.6;
+}
+
+p {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: rgb(255, 54, 54);
+}
+h2 {
+    border-bottom: 3px solid red;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin: 20px auto;
+    text-align: center;
+    color: ghostwhite;
+}
+
+li::marker {
+    color: #fb3232;
+    margin-bottom: 1%;
+    margin: 1.5%;
+}
+
+header {
+    display: block;
+    text-align: center;
+    margin: 1%;
+    width: 100%;
+    justify-content: center;
+}
+
+section {
+    margin-bottom: 10%;
+}
+
+/* Títulos */
+.tituloAcercaDe, .tituloFotos, .tituloCaracteristicas, .tituloRequisitos {
+    text-align: center;
+    width: 100%;
+}
+.tituloMinimo, .tituloMaximo {
+    text-align: center;
+}
+
+
+/* Header */
+.titulo {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.imagen_principal {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.imagen_principal img {
+    max-width: 100%;
+    height: auto;
+}
+
+.descripcion {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Sección Acerca de este juego */
+.acercaDe {
+    width: 100%;
+    margin: 1%;
+}
+
+/* Sección fotos */
+
+.sectionPhotos {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+
+.sectionPhotos img:hover {
+    transform: scale(1.05);
+    transition: transform 1s;
+    cursor: pointer;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.listaCaracteristicas li {
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+
+/* Sección requisitos */
+.listaRequisitos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5%;
+}
+.maximo, .minimo {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+}
+.maximo h2, .minimo h2 {
+    font-size: large;
+}
+
+/* Footer */
+footer {
+    background-color: #111;
+    text-align: center;
+    padding: 2%;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    color: whitesmoke;
+    font-weight: 600;
+}
