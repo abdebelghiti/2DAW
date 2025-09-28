@@ -1,6 +1,6 @@
 <?php
 
-interface Ordenador { 
+interface Ordenador {
 
     const MARCA = "Macintosh";
 
