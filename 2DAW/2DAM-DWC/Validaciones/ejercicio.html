@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <script type="text/javascript" src="validaciones.js"></script>
+</head>
+<body>
+    <!-- 
+    1. Crear 1 formulario con los campos "nombre", "teléfono" y "edad".
+    2. Validar: 
+       nombre -> obligatorio, minimo 3 caracteres.
+       telefono -> teléfono móvil válido.
+       edad -> numérico, mayor que 18, menor que 120
+    3. Los errores de validación se mostrarán todos a la vez incrustados en el HTML
+    -->
+
+    <form action="https://www.google.com/?hl=es">
+
+        <label>Nombre</label>
+        <input type="text" name="Nombre" id="inputNombre">
+        <label>Teléfono</label>
+        <input type="tel" name="Telefono" id="inputTelefono">
+        <label>Edad</label>
+        <input type="number" name="Edad" id="inputEdad">
+        <button onclick="validarForm(event)">Enviar</button>
+
+    </form>
+
+    <div id="errores" style="color: red"></div>
+
+</body>
+</html>
