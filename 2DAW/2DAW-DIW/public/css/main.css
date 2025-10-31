@@ -1,0 +1,101 @@
+body {
+  background-color: #f5f7fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 400px;
+}
+.container h1 {
+  text-align: center;
+  color: #007bff;
+}
+
+form {
+  background-color: #fff;
+  color: #333;
+  padding: 2em;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: white;
+  color: #333;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+form:focus {
+  outline: none;
+  border-color: #007bff;
+  -webkit-box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+form::-webkit-input-placeholder {
+  color: rgb(114.75, 114.75, 114.75);
+}
+form::-moz-placeholder {
+  color: rgb(114.75, 114.75, 114.75);
+}
+form:-ms-input-placeholder {
+  color: rgb(114.75, 114.75, 114.75);
+}
+form::-ms-input-placeholder {
+  color: rgb(114.75, 114.75, 114.75);
+}
+form::placeholder {
+  color: rgb(114.75, 114.75, 114.75);
+}
+form button {
+  display: inline;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  -webkit-transition: background-color 0.2 ease;
+  transition: background-color 0.2 ease;
+}
+form buttonhover {
+  background-color: rgb(0, 98.4, 204);
+}
+form .error {
+  border-color: red;
+}
+form .error::-webkit-input-placeholder {
+  color: red;
+}
+form .error::-moz-placeholder {
+  color: red;
+}
+form .error:-ms-input-placeholder {
+  color: red;
+}
+form .error::-ms-input-placeholder {
+  color: red;
+}
+form .error::placeholder {
+  color: red;
+}
+form .success {
+  border-color: green;
+}/*# sourceMappingURL=main.css.map */

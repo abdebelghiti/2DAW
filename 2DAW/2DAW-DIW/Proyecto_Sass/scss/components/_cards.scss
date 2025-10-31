@@ -1,0 +1,27 @@
+.card {
+  background-color: white;
+  padding: $base-padding;
+  margin: $base-margin;
+  border: 1px solid lighten($primary-color, 40%);
+  @include border-radius(10px);
+  @include box-shadow();
+
+  h3 {
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 0.9rem;
+  }
+}
+
+// Mixins parametrizados para cards
+@mixin card($bg: white, $color: $text-color, $padding: 1rem) {
+  background-color: $bg;
+  color: $color;
+  padding: $padding;
+  @include border-radius(8px);
+  @include box-shadow();
+}

@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 /*Route::get('/saludo/{nombre?}', function ($nombre) {
-    return "Hola $nombre, Buenvenido a mi aplicación!";
+    return "Hola $nombre, Bienvenido a mi aplicación!";
 });*/
 
 Route::get('/saludo/{nombre?}/{edad?}', function ($nombre = 'Invitado', $edad = null) {
@@ -25,3 +25,10 @@ Route::get('/saludo/{nombre?}/{edad?}', function ($nombre = 'Invitado', $edad = 
 ]);
 
 Route::get('/frutas', [FrutasController::class,'index']);
+
+
+
+//Hacer para el próximo día
+Route::middleware('asegurarFrutas')->group(function() {
+    
+});

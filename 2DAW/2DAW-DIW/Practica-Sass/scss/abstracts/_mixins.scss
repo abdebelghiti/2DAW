@@ -1,0 +1,17 @@
+// Mixin para bordes redondeados
+@mixin border-radius($radius: 5px) {
+  border-radius: $radius;
+}
+
+// Mixin para sombras
+@mixin box-shadow($x: 0px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,0.1)) {
+  box-shadow: $x $y $blur $color;
+}
+
+// Mixin para flex container
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
