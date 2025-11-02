@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla de usuarios</title>
+    <script src="js/main.js" text="text/javascript" defer></script>
 </head>
 <body>
     
@@ -11,57 +12,28 @@
 
     <div>
         <label>Buscar usuario: </label>
-        <input type="text" placeholder="Nombre">
+        <input type="text" id="buscador" placeholder="Busca por nombre o email">
         <button>Buscar</button>
     </div>
 
     <br>
 
 
-    <table border="2">
+    <table border="2" id="tablaUsuarios">
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Email</th>
+                <th>Contraseña</th>
                 <th>Teléfono</th>
                 <th>Sexo</th>
                 <th>CRUD</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Abde</td>
-                <td>Belghiti</td>
-                <td>abdessamad455@gmail.com</td>
-                <td>688704452</td>
-                <td>Hombre</td>
-                <td><a href="crud.html"><button>Modificar</button></a></td>
-            </tr>
-            <tr>
-                <td>Alexis</td>
-                <td>Trujillo</td>
-                <td>alexistrujillo@gmail.com</td>
-                <td>688504452</td>
-                <td>Hombre</td>
-                <td><a href="crud.html"><button>Modificar</button></a></td>
-            </tr>
-            <tr>
-                <td>Rodolfo</td>
-                <td>Sánchez</td>
-                <td>rodolfosanchez@gmail.com</td>
-                <td>688604452</td>
-                <td>Hombre</td>
-                <td><a href="crud.html"><button>Modificar</button></a></td>
-            </tr>
-            <tr>
-                <td>Javier</td>
-                <td>López</td>
-                <td>javierlopez@gmail.com</td>
-                <td>644704452</td>
-                <td>Hombre</td>
-                <td><a href="crud.html"><button>Modificar</button></a></td>
-            </tr>
+            <!-- Aquí se cargan los datos desde javascript -->
         </tbody>
     </table>
     <div class="pagination">
