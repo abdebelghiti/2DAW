@@ -1,25 +1,37 @@
 const contenedorPersonajes = document.querySelector("#contenedorPersonajes");
 const contenedorArmas = document.querySelector("#contenedorArmas");
 
+async function cargarPersonajes() {
+  try {
+    const response = await fetch('https://valorant-api.com/v1/agents');
+    const data = await response.json();
+    const array = data.data;
 
-const imagenesPersonajes = fetch('https://valorant-api.com/v1/agents').then(
-    response => response.json()).then(
-        response => {
-            const array = response.data;
-            array.forEach(element => {
-                const imagenPersonajes = document.createElement('img');
-                imagenPersonajes.src = element.displayIcon;
-                contenedorPersonajes.appendChild(imagenPersonajes);
-            });
-})
+    array.forEach(element => {
+      const imagenPersonaje = document.createElement('img');
+      imagenPersonaje.src = element.displayIcon;
+      contenedorPersonajes.appendChild(imagenPersonaje);
+    });
+  } catch (error) {
+    console.error("Error al cargar personajes:", error);
+  }
+}
 
-const imagenesArmas = fetch('https://valorant-api.com/v1/weapons').then(
-    response => response.json()).then(
-        response => {
-            const array = response.data;
-            array.forEach(element => {
-                const imagenArmas = document.createElement('img');
-                imagenArmas.src = element.displayIcon;
-                contenedorArmas.appendChild(imagenArmas);
-            });
-})
+async function cargarArmas() {
+  try {
+    const response = await fetch('https://valorant-api.com/v1/weapons');
+    const data = await response.json();
+    const array = data.data;
+
+    array.forEach(element => {
+      const imagenArma = document.createElement('img');
+      imagenArma.src = element.displayIcon;
+      contenedorArmas.appendChild(imagenArma);
+    });
+  } catch (error) {
+    console.error("Error al cargar armas:", error);
+  }
+}
+
+cargarPersonajes();
+cargarArmas();

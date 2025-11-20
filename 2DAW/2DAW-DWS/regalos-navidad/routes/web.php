@@ -8,6 +8,7 @@ Route::get('/', function () {
 });
 
 Route::resource('regalos', RegaloController::class);
+Route::redirect('/','/regalos');
 
 /*
 Route::get('/regalos', [RegaloController::class, 'index'])->name('regalos.index');

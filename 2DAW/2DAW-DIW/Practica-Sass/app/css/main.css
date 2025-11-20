@@ -1,9 +1,338 @@
-body {
-  background-color: red;
+/* --------------------------- */
+/* RESET BÁSICO Y TIPOGRAFÍA   */
+/* --------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.container {
-  display: -webkit-box;
-  display: -ms-flexbox;
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f9fb;
+  color: #333;
   display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* --------------------------- */
+/* NAVBAR (de todos los HTML)  */
+/* --------------------------- */
+.navbar {
+  background-color: #db3434;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.navbar__links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar__links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+.navbar__links a:hover {
+  color: black;
+}
+
+/* --------------------------- */
+/* CONTENEDOR GENERAL          */
+/* --------------------------- */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+/* --------------------------- */
+/* CARDS (módulo Sass)         */
+/* --------------------------- */
+.card,
+.card--highlight,
+.yt-card {
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  border: 1px solid #d0dce8;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.card--highlight {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  color: #fff;
+}
+
+.card h2, .card--highlight h2,
+.yt-card h3 {
+  margin-bottom: 0.8rem;
+}
+
+.card:hover,
+.yt-card:hover {
+  transform: translateY(-3px);
+}
+
+/* --------------------------- */
+/* FORMULARIOS                 */
+/* --------------------------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input,
+textarea.input {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #db3434;
+}
+
+.btn {
+  background: #db3434;
+  border: none;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: #cc0000;
+}
+
+/* --------------------------- */
+/* FOOTER                      */
+/* --------------------------- */
+.footer {
+  margin-top: 3rem;
+  background-color: #db3434;
+  color: white;
+  text-align: center;
+  padding: 1.3rem 0;
+}
+
+/* --------------------------- */
+/* ESTILO YOUTUBE HOME         */
+/* --------------------------- */
+.youtube-home .yt-hero {
+  background: url("https://i.ytimg.com/vi/67eNv_VMXZc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAzVts6D2i_jk1QxdKqQ5rTaBbK3w") center/cover no-repeat;
+  border-radius: 12px;
+  padding: 4rem 2rem;
+  color: white;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.25);
+}
+
+.youtube-home .yt-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.youtube-home .yt-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.youtube-home .yt-hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.youtube-home .yt-hero-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.youtube-home .yt-hero-btn {
+  display: inline-block;
+  background: #FF0000;
+  padding: 0.8rem 1.3rem;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.youtube-home .yt-hero-btn:hover {
+  background: #cc0000;
+}
+
+
+.yt-title {
+  padding-bottom: 1%;
+}
+
+.yt-subtitle {
+  padding-bottom: 1%;
+}
+
+.yt-upload-title {
+  padding-bottom: 1%;
+}
+
+.yt-upload-subtitle {
+  padding-bottom: 1%;
+}
+
+/* --------------------------- */
+/* SECCIÓN YOUTUBE CARDS       */
+/* --------------------------- */
+.youtube .yt-section-title,
+.youtube-home .yt-section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.yt-cards,
+.yt-home-cards {
+  display: grid;
+  gap: 2rem;
+}
+
+.yt-card {
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+
+.yt-thumbnail {
+  background: url('https://i.ytimg.com/vi/yWRr-SW1EqQ/maxresdefault.jpg') center/cover;
+  width: 260px;
+  height: 150px;
+  position: relative;
+}
+
+.yt-thumbnail-1 {
+  background: url('https://i.ytimg.com/vi/dHDXPW9heJo/maxresdefault.jpg') center/cover;
+  width: 260px;
+  height: 150px;
+  position: relative;
+}
+
+.yt-thumbnail-2 {
+  background: url('https://i.ytimg.com/vi/XA6geUJ5yjc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDr-Gx1tbLx66LiBI4hTTL2_xRPOw') center/cover;
+  width: 260px;
+  height: 150px;
+  position: relative;
+}
+
+.yt-thumbnail-3 {
+  background: url('https://i.ytimg.com/vi/aivu-VDpXvg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBaNR3mkzsrLbuuaUeolFe3rKUusA') center/cover;
+  width: 260px;
+  height: 150px;
+  position: relative;
+}
+
+.yt-thumbnail.highlight {
+  background: url('https://i.ytimg.com/vi/_r3P58nTZ0o/hqdefault.jpg') center/cover;
+}
+
+.yt-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.8);
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.yt-info {
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.yt-info h3 {
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.yt-btn {
+  padding: 0.6rem 1rem;
+  margin-top: 0.8rem;
+  background: #FF0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 50%;
+  transition: background 0.2s;
+}
+
+.yt-btn:hover {
+  background: #cc0000;
+}
+
+/* --------------------------- */
+/* RESPONSIVE                  */
+/* --------------------------- */
+@media (max-width: 768px) {
+  .yt-card,
+  .yt-home-cards {
+    flex-direction: column;
+  }
+
+  .yt-thumbnail {
+    width: 100%;
+    height: 180px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar__links {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
 }
