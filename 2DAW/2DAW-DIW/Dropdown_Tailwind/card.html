@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Flip Card 3D con Tailwind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+    <div class="group w-80 h-96 [perspectiver:1000px]">
+        <div class="relative w-full h-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-xl rounded-xl">
+            <div class="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="">
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to transparent">
+                    <h2 class="text-2xl font-bold text-white mb-1">María Martínez</h2>
+                    <p class="text-cyan-400 font-semibold">Web Developer</p>
+                </div>
+            </div>
+            <div class="absolute inset-0 w-full h-full bg-slate-800 rounded-xl [transform:rotateY(180deg)] [backface-visibility:hidden] p-8 flex flex-col justify-center items-center border-2 border-cyan-500/30">
+                <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center mb-4 shadow-lg">
+
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Habilidades</h3>
+                <p class="text-gray-300 text-sm mb-6">Experta en TailwindCSS, Figma y Animación</p>
+                <button class="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-white font-bold rounded-full transition-colors shadow-lg">Contactar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

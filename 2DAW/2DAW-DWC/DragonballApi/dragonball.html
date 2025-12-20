@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="dragonballApi.js" defer></script>
+</head>
+<body class="bg-gray-800 min-h-screen p-6">
+
+    <h1 class="text-3xl font-bold text-center text-yellow-500 mb-8">
+        Personajes Dragon Ball
+    </h1>
+
+    <div class="max-w-4xl mx-auto mb-8 p-4 bg-white rounded-xl shadow-md">
+
+        <div class="flex flex-col md:flex-row gap-4 items-center">
+
+            <input id="inputName" type="text" placeholder="Buscar por nombre..." class="w-full md:flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            />
+
+            <div class="flex gap-4 items-center">
+                <label class="flex items-center gap-1 cursor-pointer">
+                    <input type="radio" name="gender" value="Male" checked>
+                    <span>Masculino</span>
+                </label>
+
+                <label class="flex items-center gap-1 cursor-pointer">
+                    <input type="radio" name="gender" value="Female">
+                    <span>Femenino</span>
+                </label>
+                <label class="flex items-center gap-1 cursor-pointer">
+                    <input type="radio" name="gender" value="all">
+                    <span>Desconocido</span>
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+
+    <h2 id="loading" style="display: none;">Cargando...</h2>
+
+    <div id="contenedorPersonajes"
+         class="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    </div>
+
+    <div id="modal"
+         class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+
+        <div class="bg-white rounded-xl shadow-xl w-[90%] max-w-md p-6 relative">
+
+            <button id="cerrarModal"
+                    class="absolute top-3 right-4 text-2xl font-bold text-gray-500 hover:text-black">
+                &times;
+            </button>
+
+            <img id="modalImagen"
+                 class="mx-auto h-72 object-contain mb-4"
+                 alt="">
+
+            <h2 id="modalNombre"
+                class="text-2xl font-semibold text-center mb-4">
+            </h2>
+
+            <div class="space-y-2 text-center">
+                <p><span class="font-semibold">Raza:</span> <span id="modalRaza"></span></p>
+                <p><span class="font-semibold">Planeta:</span> <span id="modalPlaneta"></span></p>
+                <p><span class="font-semibold">Ki:</span> <span id="modalKi"></span></p>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+
+    <button id="first" class="px-4 py-2 rounded-lg font-semibold bg-yellow-400 text-black hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+        Primera
+    </button>
+
+    <button id="previous" class="px-4 py-2 rounded-lg font-semibold bg-yellow-400 text-black hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+        Anterior
+    </button>
+
+    <button id="next" class="px-4 py-2 rounded-lg font-semibold bg-yellow-400 text-black hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+        Siguiente
+    </button>
+
+    <button id="last" class="px-4 py-2 rounded-lg font-semibold bg-yellow-400 text-black hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+        Última
+    </button>
+
+</div>
+
+</body>
+</html>

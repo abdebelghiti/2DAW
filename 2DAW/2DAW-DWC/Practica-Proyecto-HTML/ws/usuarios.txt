@@ -1,0 +1,2 @@
+{"Nombre":"Abde","Apellidos":"Belg","Email":"abdeeeee@gmai.co","Password":"1231231231","Telefono":"421341341234","Sexo":"Hombre"}
+{"Nombre":"Pim","Apellidos":"pam","Email":"pimpampum@gmail.com","Password":"1234","Telefono":"675773422","Sexo":"Hombre"}

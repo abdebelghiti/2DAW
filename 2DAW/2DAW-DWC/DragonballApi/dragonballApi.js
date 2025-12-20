@@ -9,15 +9,39 @@ const modalRaza = document.querySelector("#modalRaza");
 const modalPlaneta = document.querySelector("#modalPlaneta");
 const modalKi = document.querySelector("#modalKi");
 
-async function cargarPersonajes() {
+//Paginación
+const first = document.querySelector("#first");
+const previous = document.querySelector("#previous");
+const next = document.querySelector("#next");
+const last = document.querySelector("#last");
+
+const loading = document.querySelector("#loading");
+
+const inputName = document.querySelector("#inputName");
+
+inputName.oninput = async () => {
+    const name = inputName.value;
+    if (name.length < 3) {
+        return;
+    }
+    console.log
+    const response = await fetch(BASE_URL + "?name=" + name);
+}
+
+async function cargarPersonajes(pagina,limit) {
+
+    loading.style.block = 'block';
+
     try {
         const contenedor = document.querySelector("#contenedorPersonajes");
 
-        const response = await fetch(BASE_URL);
+        const response = await fetch(BASE_URL + "?limit=" + limit + "&page=" + pagina);
         const data = await response.json();
-        const personajes = data.items;
+        const personajes = data;
 
-        personajes.forEach(personaje => {
+        contenedor.innerHTML = "";
+
+        personajes.items.forEach(personaje => {
             const card = document.createElement("div");
 
             card.classList.add(
@@ -68,7 +92,22 @@ async function cargarPersonajes() {
             card.addEventListener("click", () => cargarDetallePersonaje(personaje.id));
 
             contenedor.appendChild(card);
+
+            first.onclick = () => cargarPersonajes(1, 10);
+
+            previous.onclick = () =>
+                cargarPersonajes(personajes.meta.currentPage - 1, 10);
+
+            next.onclick = () =>
+                cargarPersonajes(personajes.meta.currentPage + 1, 10);
+
+            last.onclick = () =>
+                cargarPersonajes(personajes.meta.totalPages, 10);
+
+            actualizarEstadoBotones(personajes.meta);
         });
+
+        loading.style.block = "none";
 
     } catch (error) {
         console.error("Error al cargar personajes:", error);
@@ -113,4 +152,14 @@ modal.addEventListener("click", e => {
     if (e.target === modal) cerrarModal();
 });
 
-cargarPersonajes();
+function actualizarEstadoBotones(meta) {
+    const { currentPage, totalPages } = meta;
+
+    first.disabled = currentPage === 1;
+    previous.disabled = currentPage === 1;
+
+    next.disabled = currentPage === totalPages;
+    last.disabled = currentPage === totalPages;
+}
+
+cargarPersonajes(1,10);
