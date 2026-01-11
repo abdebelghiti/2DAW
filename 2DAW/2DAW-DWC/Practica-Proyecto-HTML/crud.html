@@ -3,67 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD</title>
+    <title>Modificar usuario</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Navbar dinámico -->
+    <script src="js/nav.js" defer></script>
 </head>
-<body>
 
-    <form action="tabla.html" method="post">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-        <fieldset>
+    <!-- Contenedor principal -->
+    <div class="flex flex-1 items-center justify-center">
 
-            <legend>
-                <h1>Modificar usuario</h1>
-            </legend>
+        <form action="tabla.html"
+              method="post"
+              class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
 
-            <div>
-                <label>Nombre: </label>
-                <input type="text" placeholder="Nombre" value="Abdessamad">
-            </div>
+            <fieldset class="space-y-4">
+                <legend class="text-center mb-4">
+                    <h1 class="text-2xl font-bold">Modificar usuario</h1>
+                </legend>
 
-            <div>
-                <label>Apellidos: </label>
-                <input type="text" placeholder="Apellidos" value="Belghiti">
-            </div>
+                <!-- Nombre -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Nombre</label>
+                    <input type="text"
+                           placeholder="Nombre"
+                           value="Abdessamad"
+                           class="border rounded px-3 py-2" />
+                </div>
 
-            <div>
-                <label>Email</label>
-                <input type="email" placeholder="Email" value="abdessamad455@gmail.com">
-            </div>
+                <!-- Apellidos -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Apellidos</label>
+                    <input type="text"
+                           placeholder="Apellidos"
+                           value="Belghiti"
+                           class="border rounded px-3 py-2" />
+                </div>
 
-            <div>
-                <label>Teléfono</label>
-                <input type="tel" placeholder="Teléfono" value="688444555">
-            </div>
+                <!-- Email -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Email</label>
+                    <input type="email"
+                           placeholder="Email"
+                           value="abdessamad455@gmail.com"
+                           class="border rounded px-3 py-2" />
+                </div>
 
-            <div>
-                <label>Sexo: </label>
+                <!-- Teléfono -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Teléfono</label>
+                    <input type="tel"
+                           placeholder="Teléfono"
+                           value="688444555"
+                           class="border rounded px-3 py-2" />
+                </div>
 
-                <label for="Hombre">Hombre</label>
-                <input type="radio" name="Sexo" id="Hombre" value="Hombre" checked/>   
-            
-                <label for="Mujer">Mujer</label>
-                <input type="radio" name="Sexo" id="Mujer" value="Mujer"/>
-                
-            </div>
+                <!-- Sexo -->
+                <div>
+                    <label class="font-semibold block mb-2">Sexo</label>
+                    <div class="flex items-center gap-4">
+                        <label class="flex items-center gap-1">
+                            <input type="radio" name="Sexo" value="Hombre" checked>
+                            Hombre
+                        </label>
+                        <label class="flex items-center gap-1">
+                            <input type="radio" name="Sexo" value="Mujer">
+                            Mujer
+                        </label>
+                    </div>
+                </div>
 
-            <div>
-                <a href="tabla.html"><button>Guardar cambios</button></a>
-                <a href="tabla.html"><button>Eliminar usuario</button></a>
-            </div>
+                <!-- Acciones principales -->
+                <div class="flex gap-3">
+                    <a href="tabla.html" class="flex-1">
+                        <button type="button"
+                                class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
+                            Guardar cambios
+                        </button>
+                    </a>
 
-            <br>
+                    <a href="tabla.html" class="flex-1">
+                        <button type="button"
+                                class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+                            Eliminar usuario
+                        </button>
+                    </a>
+                </div>
 
-            <div>
-                <a href="tabla.html"><button>Regresar a tabla</button></a>
-            </div>
+                <!-- Navegación -->
+                <div class="flex flex-col gap-3 mt-4">
+                    <a href="tabla.html">
+                        <button type="button"
+                                class="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">
+                            Regresar a tabla
+                        </button>
+                    </a>
 
-            <br>
+                    <a href="lista-enlaces.html">
+                        <button type="button"
+                                class="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-900">
+                            Regresar a lista de enlaces
+                        </button>
+                    </a>
+                </div>
 
-            <div>
-                <a href="lista-enlaces.html"><button>Regresar a lista de enlaces</button></a>
-            </div>
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
 
 </body>
 </html>

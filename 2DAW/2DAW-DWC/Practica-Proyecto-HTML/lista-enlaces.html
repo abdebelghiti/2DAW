@@ -4,13 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de enlaces</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Navbar dinámico -->
+    <script src="js/nav.js" defer></script>
 </head>
-<body>
-    <h1>Lista de enlaces</h1>
-    <a href="login.html"><button>Acceder a login</button></a>
-    <a href="tabla.html"><button> Acceder a página principal</button></a>
-    <a href="registro.html"><button> Acceder a registro</button></a>
-    <a href="crud.html"><button>Acceder a CRUD</button></a>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Contenido principal -->
+    <div class="flex flex-1 items-center justify-center">
+
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-center space-y-4">
+
+            <h1 class="text-2xl font-bold mb-4">Lista de enlaces</h1>
+
+            <a href="login.html" class="block">
+                <button class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
+                    Acceder a login
+                </button>
+            </a>
+
+            <a href="tabla.html" class="block">
+                <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                    Acceder a la tabla
+                </button>
+            </a>
+
+            <a href="registro.html" class="block">
+                <button class="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700">
+                    Acceder a registro
+                </button>
+            </a>
+
+            <a href="crud.html" class="block">
+                <button class="w-full bg-gray-700 text-white py-2 rounded hover:bg-gray-800">
+                    Acceder a CRUD
+                </button>
+            </a>
+
+        </div>
+    </div>
 
 </body>
 </html>

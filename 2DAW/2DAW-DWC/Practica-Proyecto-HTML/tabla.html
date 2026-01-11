@@ -4,53 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla de usuarios</title>
-    <script src="js/main.js" text="text/javascript" defer></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- JS -->
+    <script src="js/main.js" defer></script>
+    <script src="js/nav.js" defer></script>
 </head>
-<body>
-    
-    <h1>Tabla de usuarios</h1>
 
-    <div>
-        <label>Buscar usuario: </label>
-        <input type="text" id="buscador" placeholder="Busca por nombre o email">
-        <button>Buscar</button>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-center my-6">
+        Tabla de usuarios
+    </h1>
+
+    <!-- Buscador -->
+    <div class="flex justify-center items-center gap-3 mb-6">
+        <label class="font-semibold">Buscar usuario:</label>
+        <input
+            type="text"
+            id="buscador"
+            placeholder="Busca por nombre o email"
+            class="border border-gray-400 rounded px-3 py-1 w-64"
+        >
+        <button
+            class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">
+            Buscar
+        </button>
     </div>
 
-    <br>
-
-
-    <table border="2" id="tablaUsuarios">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Email</th>
-                <th>Contraseña</th>
-                <th>Teléfono</th>
-                <th>Sexo</th>
-                <th>CRUD</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Aquí se cargan los datos desde javascript -->
-        </tbody>
-    </table>
-    <div class="pagination">
-        <button> << </button>
-        <button> < </button>
-        <input type="text"placeholder="Introduce una página">
-        <button type="submit">Buscar</button>
-        <button> > </button>
-        <button> >> </button>
+    <!-- Tabla -->
+    <div class="flex justify-center">
+        <table id="tablaUsuarios"
+               class="min-w-[90%] border border-gray-700 text-center bg-white shadow-md">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="p-2">Nombre</th>
+                    <th class="p-2">Apellidos</th>
+                    <th class="p-2">Email</th>
+                    <th class="p-2">Contraseña</th>
+                    <th class="p-2">Teléfono</th>
+                    <th class="p-2">Sexo</th>
+                    <th class="p-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
-    <br>
+    <div id="formEditar"
+     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 
-    <a href="login.html"><button>Cerrar sesión</button></a>
+    <!-- Caja del modal -->
+    <div id="modalContenido"
+         class="bg-white p-6 rounded-lg w-96 space-y-3 shadow-lg">
 
-    <div>
-        <a href="lista-enlaces.html"><button>Regresar a lista de enlaces</button></a>
+        <h2 class="text-xl font-bold text-center mb-2">Editar usuario</h2>
+
+        <input id="nombre" class="w-full border rounded p-2" placeholder="Nombre">
+        <input id="apellidos" class="w-full border rounded p-2" placeholder="Apellidos">
+        <input id="email" class="w-full border rounded p-2" placeholder="Email">
+        <input id="contraseña" class="w-full border rounded p-2" placeholder="Contraseña">
+        <input id="telefono" class="w-full border rounded p-2" placeholder="Teléfono">
+        <input id="sexo" class="w-full border rounded p-2" placeholder="Sexo">
+
+        <!-- Botones -->
+        <div class="flex gap-3 pt-2">
+            <button id="guardar"
+                    class="flex-1 bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
+                Guardar
+            </button>
+
+            <button id="cerrarModal"
+                    type="button"
+                    class="flex-1 bg-gray-500 text-white py-2 rounded hover:bg-gray-600">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Paginación -->
+    <div class="flex justify-center items-center gap-2 mt-6">
+        <button class="border px-3 py-1 rounded">&laquo;</button>
+        <button class="border px-3 py-1 rounded">&lsaquo;</button>
+
+        <input
+            type="text"
+            placeholder="Introduce una página"
+            class="border px-3 py-1 rounded w-40 text-center"
+        >
+
+        <button class="bg-blue-600 text-white px-3 py-1 rounded">
+            Buscar
+        </button>
+
+        <button class="border px-3 py-1 rounded">&rsaquo;</button>
+        <button class="border px-3 py-1 rounded">&raquo;</button>
+    </div>
+
+    <!-- Acciones inferiores -->
+    <div class="flex justify-center gap-4 mt-8">
+        <a href="login.html">
+            <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                Cerrar sesión
+            </button>
+        </a>
+
+        <a href="lista-enlaces.html">
+            <button class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
+                Regresar a lista de enlaces
+            </button>
+        </a>
     </div>
 
 </body>

@@ -4,71 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/nav.js" defer></script>
 </head>
-<body>
 
-    <form action="ws/crearUsuario.php" method="POST">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-        <fieldset>
+    <!-- Contenedor principal -->
+    <div class="flex flex-1 items-center justify-center">
 
-            <legend>
-                <h1>Formulario de Registro</h1>
-            </legend>
-        
-            <div>
-                <label>Nombre: </label>
-                <input type="text" name="Nombre" id="nombre"  placeholder="Introduce el nombre"/>
-            </div>
-    
-            <div>
-                <label>Apellidos: </label>
-                <input type="text" name="Apellidos" id="apellidos" placeholder="Introduce los apellidos"/>
-            </div>
-    
-            <div>
-                <label>Email: </label>
-                <input type="email" name="Email" id="email" placeholder="Introduce el email" required/>
-            </div>
-    
-            <div>
-                <label>Contraseña: </label>
-                <input type="password" name="Password" id="Password" placeholder="Introduce la contraseña" required/>
-            </div>
-    
-            <div>
-                <label>Teléfono: </label>
-                <input type="tel" name="Telefono" id="telefono" placeholder="Introduce el teléfono"/>
-            </div>
-    
-            <div>
-                <label>Sexo: </label>
+        <form action="ws/crearUsuario.php"
+              method="POST"
+              class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
 
-                <label for="Hombre">Hombre</label>
-                <input type="radio" name="Sexo" id="sexo" value="Hombre"/>    
-            
-                <label for="Mujer">Mujer</label>
-                <input type="radio" name="Sexo" id="sexo" value="Mujer"/>
-                
-            </div>
+            <fieldset class="space-y-4">
+                <legend class="text-center mb-4">
+                    <h1 class="text-2xl font-bold">Formulario de Registro</h1>
+                </legend>
 
-            <div>
-                <button type="submit">Crear usuario</button>
-            </div>
-    
-        </fieldset>
+                <!-- Nombre -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Nombre</label>
+                    <input type="text"
+                           name="Nombre"
+                           id="nombre"
+                           placeholder="Introduce el nombre"
+                           class="border rounded px-3 py-2" />
+                </div>
 
-    </form>
+                <!-- Apellidos -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Apellidos</label>
+                    <input type="text"
+                           name="Apellidos"
+                           id="apellidos"
+                           placeholder="Introduce los apellidos"
+                           class="border rounded px-3 py-2" />
+                </div>
 
-    <div>
-        <label>Ya tienes una cuenta?</label>
-        <a href="login.html"><button>Login</button></a>
+                <!-- Email -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Email</label>
+                    <input type="email"
+                           name="Email"
+                           id="email"
+                           required
+                           placeholder="Introduce el email"
+                           class="border rounded px-3 py-2" />
+                </div>
+
+                <!-- Contraseña -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Contraseña</label>
+                    <input type="password"
+                           name="Password"
+                           id="Password"
+                           required
+                           placeholder="Introduce la contraseña"
+                           class="border rounded px-3 py-2" />
+                </div>
+
+                <!-- Teléfono -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Teléfono</label>
+                    <input type="tel"
+                           name="Telefono"
+                           id="telefono"
+                           placeholder="Introduce el teléfono"
+                           class="border rounded px-3 py-2" />
+                </div>
+
+                <!-- Sexo -->
+                <div>
+                    <label class="font-semibold block mb-2">Sexo</label>
+                    <div class="flex items-center gap-4">
+                        <label class="flex items-center gap-1">
+                            <input type="radio" name="Sexo" value="Hombre">
+                            Hombre
+                        </label>
+
+                        <label class="flex items-center gap-1">
+                            <input type="radio" name="Sexo" value="Mujer">
+                            Mujer
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Botón -->
+                <button type="submit"
+                        class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 transition">
+                    Crear usuario
+                </button>
+            </fieldset>
+        </form>
     </div>
 
-    <br>
+    <!-- Enlaces inferiores -->
+    <div class="flex justify-center gap-6 mb-6">
 
-    <div>
-        <a href="lista-enlaces.html"><button>Regresar a lista de enlaces</button></a>
+        <div class="flex items-center gap-2">
+            <span>¿Ya tienes una cuenta?</span>
+            <a href="login.html">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Login
+                </button>
+            </a>
+        </div>
+
+        <a href="lista-enlaces.html">
+            <button class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800">
+                Regresar a lista de enlaces
+            </button>
+        </a>
     </div>
-    
+
 </body>
 </html>
