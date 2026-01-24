@@ -1,37 +1,47 @@
-const contenedorPersonajes = document.querySelector("#contenedorPersonajes");
-const contenedorArmas = document.querySelector("#contenedorArmas");
+const contenedorPersonajes = document.getElementById("contenedorPersonajes");
+const contenedorArmas = document.getElementById("contenedorArmas");
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modalContent");
+const closeModal = document.getElementById("closeModal");
 
 async function cargarPersonajes() {
-  try {
-    const response = await fetch('https://valorant-api.com/v1/agents');
-    const data = await response.json();
-    const array = data.data;
-
-    array.forEach(element => {
-      const imagenPersonaje = document.createElement('img');
-      imagenPersonaje.src = element.displayIcon;
-      contenedorPersonajes.appendChild(imagenPersonaje);
-    });
-  } catch (error) {
-    console.error("Error al cargar personajes:", error);
-  }
+  if (!contenedorPersonajes) return;
+  const res = await fetch("https://valorant-api.com/v1/agents?isPlayableCharacter=true");
+  const data = await res.json();
+  data.data.forEach(agent => {
+    const card = document.createElement("div");
+    card.className = "bg-white dark:bg-gray-800 rounded p-4 shadow border border-gray-200 dark:border-gray-700 text-center cursor-pointer hover:scale-105 transform transition w-full";
+    card.innerHTML = `<img src="${agent.displayIcon}" class="w-32 h-32 mx-auto mb-2"><h3>${agent.displayName}</h3>`;
+    card.addEventListener("click", () => abrirModal(`<img src="${agent.fullPortrait}" class="w-full h-96 object-contain mb-4"><h2 class="text-2xl font-bold mb-2">${agent.displayName}</h2><p>${agent.description}</p>`));
+    contenedorPersonajes.appendChild(card);
+  });
 }
 
 async function cargarArmas() {
-  try {
-    const response = await fetch('https://valorant-api.com/v1/weapons');
-    const data = await response.json();
-    const array = data.data;
-
-    array.forEach(element => {
-      const imagenArma = document.createElement('img');
-      imagenArma.src = element.displayIcon;
-      contenedorArmas.appendChild(imagenArma);
-    });
-  } catch (error) {
-    console.error("Error al cargar armas:", error);
-  }
+  if (!contenedorArmas) return;
+  const res = await fetch("https://valorant-api.com/v1/weapons");
+  const data = await res.json();
+  data.data.forEach(arma => {
+    const card = document.createElement("div");
+    card.className = "bg-white dark:bg-gray-800 rounded p-4 shadow border border-gray-200 dark:border-gray-700 text-center cursor-pointer hover:scale-105 transform transition w-full";
+    card.innerHTML = `<img src="${arma.displayIcon}" class="w-full h-32 object-contain mb-2"><h3>${arma.displayName}</h3>`;
+    card.addEventListener("click", () => abrirModal(`<img src="${arma.displayIcon}" class="w-full h-60 object-contain mb-4"><h2 class="text-2xl font-bold mb-2">${arma.displayName}</h2><p>Categoría: ${arma.shopData?.category || "N/A"}</p>`));
+    contenedorArmas.appendChild(card);
+  });
 }
 
-cargarPersonajes();
-cargarArmas();
+if (modal) {
+  closeModal?.addEventListener("click", () => modal.classList.add("hidden"));
+  modal.addEventListener("click", e => { if (!modalContent.contains(e.target)) modal.classList.add("hidden"); });
+}
+
+function abrirModal(html) {
+  const modalBody = document.getElementById("modalBody");
+  if (modalBody) {
+    modalBody.innerHTML = html;
+  }
+  modal.classList.remove("hidden");
+}
+
+contenedorPersonajes ? cargarPersonajes() : null;
+contenedorArmas ? cargarArmas() : null;

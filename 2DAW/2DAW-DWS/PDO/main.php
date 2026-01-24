@@ -5,9 +5,6 @@ error_reporting(E_ALL);
 $idAsignatura = $_POST['id'] ?? null;
 $nombreAsignatura = $_GET['nombre'] ?? null;
 
-echo "ID recibido por GET: " . ($idAsignatura ?? 'NULL') . "<br>";
-echo "Nombre recibido por POST: " . ($nombreAsignatura ?? 'NULL') . "<br><br>";
-
 if ($idAsignatura === null || $nombreAsignatura === null) {
     die("ERROR: Debes enviar un id por GET y un nombre por POST");
 }
