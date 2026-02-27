@@ -1,2 +1,9 @@
 {"Nombre":"Abde","Apellidos":"Belg","Email":"abdeeeee@gmai.co","Password":"1231231231","Telefono":"421341341234","Sexo":"Hombre"}
 {"Nombre":"Pim","Apellidos":"pam","Email":"pimpampum@gmail.com","Password":"1234","Telefono":"675773422","Sexo":"Hombre"}
+{"id":null,"Nombre":"Test User","Apellidos":"Tester","Email":"test@example.com","Password":"123","Telefono":"123456789","Sexo":"H"}
+{"id":null,"Nombre":"Test User","Apellidos":"Tester","Email":"test@example.com","Password":"123","Telefono":"123456789","Sexo":"H"}
+{"id":null,"Nombre":"Test User","Apellidos":"Testing","Email":"test2@example.com","Password":"123","Telefono":"123456789","Sexo":"Hombre"}
+{"id":null,"Nombre":"Test User","Apellidos":"Testing","Email":"test2@example.com","Password":"123","Telefono":"123456789","Sexo":"Hombre"}
+{"id":null,"Nombre":"Test User","Apellidos":"Testing","Email":"test2@example.com","Password":"123","Telefono":"123456789","Sexo":"Hombre"}
+{"id":null,"Nombre":"nuevo","Apellidos":"nuevisimo","Email":"ejemplo@gmail.com","Password":"123erdfsa","Telefono":"6854435443","Sexo":"Hombre","FechaNacimiento":null}
+{"id":null,"Nombre":"hola","Apellidos":"adios","Email":"holaho@gmai.co","Password":"54rewrwer","Telefono":"43243234","Sexo":"Hombre","FechaNacimiento":null}

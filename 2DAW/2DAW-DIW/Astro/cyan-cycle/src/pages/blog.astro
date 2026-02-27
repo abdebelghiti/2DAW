@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const allPost = Object.values(
+	import.meta.glob("./posts/*.md", { eager: true }),
+);
+const pageTitle = "Blog";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+	<h2>Esta es la página de blog</h2>
+	<ul>
+		{
+			allPost.map((post: any) => (
+				<li>
+					<a href={post.url}>{post.frontmatter.title}</a>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<h2>Esta es la página de blog</h2>
+
+		<ul>
+			<li><a href="/posts/post-1.md"></a>Post 1</li>
+			<li><a href="/posts/post-2.md"></a>Post 2</li>
+			<li><a href="/posts/post-3.md"></a>Post 3</li>
+		</ul>
+
+		<article>
+			<h4>Hola</h4>
+			<p>Esto es un articulo del blog</p>
+		</article>
+	</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,9 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Navbar dinámico -->
     <script src="js/nav.js" defer></script>
@@ -17,9 +21,7 @@
     <!-- Contenedor principal -->
     <div class="flex flex-1 items-center justify-center">
 
-        <form action="tabla.html"
-              method="post"
-              class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <form id="formCrud" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
 
             <fieldset class="space-y-4">
                 <legend class="text-center mb-4">
@@ -29,37 +31,43 @@
                 <!-- Nombre -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Nombre</label>
-                    <input type="text"
-                           placeholder="Nombre"
-                           value="Abdessamad"
-                           class="border rounded px-3 py-2" />
+                    <input type="text" id="crudNombre" name="Nombre" placeholder="Nombre"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Apellidos -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Apellidos</label>
-                    <input type="text"
-                           placeholder="Apellidos"
-                           value="Belghiti"
-                           class="border rounded px-3 py-2" />
+                    <input type="text" id="crudApellidos" name="Apellidos" placeholder="Apellidos"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Email -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Email</label>
-                    <input type="email"
-                           placeholder="Email"
-                           value="abdessamad455@gmail.com"
-                           class="border rounded px-3 py-2" />
+                    <input type="email" id="crudEmail" name="Email" placeholder="Email"
+                        class="border rounded px-3 py-2" />
+                </div>
+
+                <!-- Contraseña -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Contraseña</label>
+                    <input type="text" id="crudPassword" name="Password" placeholder="Nueva contraseña (opcional)"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Teléfono -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Teléfono</label>
-                    <input type="tel"
-                           placeholder="Teléfono"
-                           value="688444555"
-                           class="border rounded px-3 py-2" />
+                    <input type="tel" id="crudTelefono" name="Telefono" placeholder="Teléfono"
+                        class="border rounded px-3 py-2" />
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Fecha de Nacimiento</label>
+                    <input type="date" id="crudFechaNacimiento" name="FechaNacimiento"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Sexo -->
@@ -67,11 +75,11 @@
                     <label class="font-semibold block mb-2">Sexo</label>
                     <div class="flex items-center gap-4">
                         <label class="flex items-center gap-1">
-                            <input type="radio" name="Sexo" value="Hombre" checked>
+                            <input type="radio" name="Sexo" id="crudSexoH" value="H">
                             Hombre
                         </label>
                         <label class="flex items-center gap-1">
-                            <input type="radio" name="Sexo" value="Mujer">
+                            <input type="radio" name="Sexo" id="crudSexoM" value="M">
                             Mujer
                         </label>
                     </div>
@@ -79,33 +87,27 @@
 
                 <!-- Acciones principales -->
                 <div class="flex gap-3">
-                    <a href="tabla.html" class="flex-1">
-                        <button type="button"
-                                class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
-                            Guardar cambios
-                        </button>
-                    </a>
+                    <button type="submit"
+                        class="flex-1 w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
+                        Guardar cambios
+                    </button>
 
-                    <a href="tabla.html" class="flex-1">
-                        <button type="button"
-                                class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
-                            Eliminar usuario
-                        </button>
-                    </a>
+                    <button type="button" id="btnEliminarCrud"
+                        class="flex-1 w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+                        Eliminar usuario
+                    </button>
                 </div>
 
                 <!-- Navegación -->
                 <div class="flex flex-col gap-3 mt-4">
                     <a href="tabla.html">
-                        <button type="button"
-                                class="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">
+                        <button type="button" class="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700">
                             Regresar a tabla
                         </button>
                     </a>
 
                     <a href="lista-enlaces.html">
-                        <button type="button"
-                                class="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-900">
+                        <button type="button" class="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-900">
                             Regresar a lista de enlaces
                         </button>
                     </a>
@@ -115,5 +117,100 @@
         </form>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            if (!id) {
+                alert("No se ha especificado un ID de usuario.");
+                return;
+            }
+
+            // Cargar datos
+            try {
+                const res = await fetch(`ws/getUsuario.php?id=${id}`);
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const u = json.data;
+                    document.getElementById('crudNombre').value = u.Nombre || u.nombre || '';
+                    document.getElementById('crudApellidos').value = u.Apellidos || u.apellidos || '';
+                    document.getElementById('crudEmail').value = u.Email || u.email || '';
+                    document.getElementById('crudPassword').value = u.Password || u.password || u.contraseña || '';
+                    document.getElementById('crudTelefono').value = u.Telefono || u.telefono || '';
+                    if (document.getElementById('crudFechaNacimiento')) document.getElementById('crudFechaNacimiento').value = u.FechaNacimiento || u.fechaNacimiento || '';
+
+                    if (u.Sexo === 'H' || u.sexo === 'H' || u.Sexo === 'Hombre' || u.sexo === 'Hombre') document.getElementById('crudSexoH').checked = true;
+                    if (u.Sexo === 'M' || u.sexo === 'M' || u.Sexo === 'Mujer' || u.sexo === 'Mujer') document.getElementById('crudSexoM').checked = true;
+                } else {
+                    Swal.fire('Error al cargar', json.message, 'error');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+
+            // Guardar cambios
+            document.getElementById('formCrud').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                try {
+                    const res = await fetch(`ws/modificarUsuario.php?id=${id}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const json = await res.json();
+                    if (json.success) {
+                        Swal.fire({
+                            title: '¡Modificado!',
+                            text: 'Usuario modificado correctamente.',
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = 'tabla.html';
+                        });
+                    } else {
+                        Swal.fire('Error', json.message, 'error');
+                    }
+                } catch (e) {
+                    console.error(e);
+                    Swal.fire('Error', 'Hubo un error de conexión.', 'error');
+                }
+            });
+
+            // Eliminar
+            document.getElementById('btnEliminarCrud').addEventListener('click', async () => {
+                const result = await Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se podrá revertir",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                });
+
+                if (!result.isConfirmed) return;
+
+                try {
+                    const res = await fetch(`ws/deleteUsuario.php?id=${id}`);
+                    const json = await res.json();
+                    if (json.success) {
+                        Swal.fire('Eliminado!', 'Usuario eliminado correctamente.', 'success').then(() => {
+                            window.location.href = 'tabla.html';
+                        });
+                    } else {
+                        Swal.fire('Error', json.message, 'error');
+                    }
+                } catch (e) {
+                    console.error(e);
+                    Swal.fire('Error', 'Hubo un error de conexión al eliminar.', 'error');
+                }
+            });
+        });
+    </script>
+
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,9 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- JS -->
     <script src="js/main.js" defer></script>
@@ -23,22 +27,16 @@
     <!-- Buscador -->
     <div class="flex justify-center items-center gap-3 mb-6">
         <label class="font-semibold">Buscar usuario:</label>
-        <input
-            type="text"
-            id="buscador"
-            placeholder="Busca por nombre o email"
-            class="border border-gray-400 rounded px-3 py-1 w-64"
-        >
-        <button
-            class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">
+        <input type="text" id="buscador" placeholder="Busca por nombre o email"
+            class="border border-gray-400 rounded px-3 py-1 w-64">
+        <button class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">
             Buscar
         </button>
     </div>
 
     <!-- Tabla -->
     <div class="flex justify-center">
-        <table id="tablaUsuarios"
-               class="min-w-[90%] border border-gray-700 text-center bg-white shadow-md">
+        <table id="tablaUsuarios" class="min-w-[90%] border border-gray-700 text-center bg-white shadow-md">
             <thead class="bg-gray-800 text-white">
                 <tr>
                     <th class="p-2">Nombre</th>
@@ -47,6 +45,7 @@
                     <th class="p-2">Contraseña</th>
                     <th class="p-2">Teléfono</th>
                     <th class="p-2">Sexo</th>
+                    <th class="p-2">Fecha Nacimiento</th>
                     <th class="p-2">Acciones</th>
                 </tr>
             </thead>
@@ -54,37 +53,38 @@
         </table>
     </div>
 
-    <div id="formEditar"
-     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div id="formEditar" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 
-    <!-- Caja del modal -->
-    <div id="modalContenido"
-         class="bg-white p-6 rounded-lg w-96 space-y-3 shadow-lg">
+        <!-- Caja del modal -->
+        <div id="modalContenido" class="bg-white p-6 rounded-lg w-96 space-y-3 shadow-lg">
 
-        <h2 class="text-xl font-bold text-center mb-2">Editar usuario</h2>
+            <h2 class="text-xl font-bold text-center mb-2">Editar usuario</h2>
 
-        <input id="nombre" class="w-full border rounded p-2" placeholder="Nombre">
-        <input id="apellidos" class="w-full border rounded p-2" placeholder="Apellidos">
-        <input id="email" class="w-full border rounded p-2" placeholder="Email">
-        <input id="contraseña" class="w-full border rounded p-2" placeholder="Contraseña">
-        <input id="telefono" class="w-full border rounded p-2" placeholder="Teléfono">
-        <input id="sexo" class="w-full border rounded p-2" placeholder="Sexo">
+            <input id="nombre" class="w-full border rounded p-2" placeholder="Nombre">
+            <input id="apellidos" class="w-full border rounded p-2" placeholder="Apellidos">
+            <input id="email" type="email" class="w-full border rounded p-2" placeholder="Email">
+            <input id="contraseña" type="password" class="w-full border rounded p-2" placeholder="Contraseña">
+            <input id="telefono" type="tel" class="w-full border rounded p-2" placeholder="Teléfono">
+            <select id="sexo" class="w-full border rounded p-2 text-gray-500">
+                <option value="">Selecciona sexo</option>
+                <option value="H">Hombre</option>
+                <option value="M">Mujer</option>
+            </select>
+            <input id="fechaNacimiento" type="date" class="w-full border rounded p-2" placeholder="Fecha Nacimiento">
 
-        <!-- Botones -->
-        <div class="flex gap-3 pt-2">
-            <button id="guardar"
-                    class="flex-1 bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
-                Guardar
-            </button>
+            <!-- Botones -->
+            <div class="flex gap-3 pt-2">
+                <button id="guardar" class="flex-1 bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700">
+                    Guardar
+                </button>
 
-            <button id="cerrarModal"
-                    type="button"
+                <button id="cerrarModal" type="button"
                     class="flex-1 bg-gray-500 text-white py-2 rounded hover:bg-gray-600">
-                Cerrar
-            </button>
+                    Cerrar
+                </button>
+            </div>
         </div>
     </div>
-</div>
 
 
     <!-- Paginación -->
@@ -92,11 +92,7 @@
         <button class="border px-3 py-1 rounded">&laquo;</button>
         <button class="border px-3 py-1 rounded">&lsaquo;</button>
 
-        <input
-            type="text"
-            placeholder="Introduce una página"
-            class="border px-3 py-1 rounded w-40 text-center"
-        >
+        <input type="text" placeholder="Introduce una página" class="border px-3 py-1 rounded w-40 text-center">
 
         <button class="bg-blue-600 text-white px-3 py-1 rounded">
             Buscar
@@ -122,4 +118,5 @@
     </div>
 
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,10 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main.js" defer></script>
     <script src="js/nav.js" defer></script>
 </head>
 
@@ -15,9 +20,7 @@
     <!-- Contenedor principal -->
     <div class="flex flex-1 items-center justify-center">
 
-        <form action="ws/crearUsuario.php"
-              method="POST"
-              class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <form id="formRegistro" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
 
             <fieldset class="space-y-4">
                 <legend class="text-center mb-4">
@@ -27,53 +30,42 @@
                 <!-- Nombre -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Nombre</label>
-                    <input type="text"
-                           name="Nombre"
-                           id="nombre"
-                           placeholder="Introduce el nombre"
-                           class="border rounded px-3 py-2" />
+                    <input type="text" name="Nombre" id="nombre" placeholder="Introduce el nombre"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Apellidos -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Apellidos</label>
-                    <input type="text"
-                           name="Apellidos"
-                           id="apellidos"
-                           placeholder="Introduce los apellidos"
-                           class="border rounded px-3 py-2" />
+                    <input type="text" name="Apellidos" id="apellidos" placeholder="Introduce los apellidos"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Email -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Email</label>
-                    <input type="email"
-                           name="Email"
-                           id="email"
-                           required
-                           placeholder="Introduce el email"
-                           class="border rounded px-3 py-2" />
+                    <input type="email" name="Email" id="email" required placeholder="Introduce el email"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Contraseña -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Contraseña</label>
-                    <input type="password"
-                           name="Password"
-                           id="Password"
-                           required
-                           placeholder="Introduce la contraseña"
-                           class="border rounded px-3 py-2" />
+                    <input type="password" name="Password" id="Password" required placeholder="Introduce la contraseña"
+                        class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Teléfono -->
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1">Teléfono</label>
-                    <input type="tel"
-                           name="Telefono"
-                           id="telefono"
-                           placeholder="Introduce el teléfono"
-                           class="border rounded px-3 py-2" />
+                    <input type="tel" name="Telefono" id="telefono" placeholder="Introduce el teléfono"
+                        class="border rounded px-3 py-2" />
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="flex flex-col">
+                    <label class="font-semibold mb-1">Fecha de Nacimiento</label>
+                    <input type="date" name="FechaNacimiento" id="fechaNacimiento" class="border rounded px-3 py-2" />
                 </div>
 
                 <!-- Sexo -->
@@ -81,12 +73,12 @@
                     <label class="font-semibold block mb-2">Sexo</label>
                     <div class="flex items-center gap-4">
                         <label class="flex items-center gap-1">
-                            <input type="radio" name="Sexo" value="Hombre">
+                            <input type="radio" name="Sexo" value="H">
                             Hombre
                         </label>
 
                         <label class="flex items-center gap-1">
-                            <input type="radio" name="Sexo" value="Mujer">
+                            <input type="radio" name="Sexo" value="M">
                             Mujer
                         </label>
                     </div>
@@ -94,7 +86,7 @@
 
                 <!-- Botón -->
                 <button type="submit"
-                        class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 transition">
+                    class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 transition">
                     Crear usuario
                 </button>
             </fieldset>
@@ -121,4 +113,5 @@
     </div>
 
 </body>
+
 </html>

@@ -1,115 +1,294 @@
-const usuarios = [
-    { nombre: "Abde", apellidos: "Belghiti", email: "abdessamad455@gmail.com", contraseña: "123456", telefono: "688704452", sexo: "Hombre" },
-    { nombre: "Alexis", apellidos: "Trujillo", email: "alexistrujillo@gmail.com", contraseña: "123456", telefono: "688504452", sexo: "Hombre" },
-    { nombre: "Rodolfo", apellidos: "Sánchez", email: "rodolfosanchez@gmail.com", contraseña: "123456", telefono: "688604452", sexo: "Hombre" },
-    { nombre: "Javier", apellidos: "López", email: "javierlopez@gmail.com", contraseña: "123456", telefono: "644704452", sexo: "Hombre" }
-];
+let usuarios = [];
+let idEditar = null;
 
-let indiceEditar = null;
+async function cargarUsuarios() {
+    try {
+        const response = await fetch('ws/getUsuario.php');
+        const json = await response.json();
+        if (json.success) {
+            usuarios = json.data;
+            cargarTabla(usuarios);
+        } else {
+            console.error(json.message);
+            Swal.fire('Error', 'Error al cargar usuarios: ' + json.message, 'error');
+        }
+    } catch (error) {
+        console.error("Error en la petición:", error);
+    }
+}
 
 function cargarTabla(lista) {
     const tbody = document.querySelector("#tablaUsuarios tbody");
+    if (!tbody) return; // Por si estamos en otra página
     tbody.innerHTML = "";
 
-    lista.forEach((usuario, index) => {
+    lista.forEach((usuario) => {
         const fila = document.createElement("tr");
-        fila.className = "border-t";
+        fila.className = "border-t border-gray-300";
 
-        fila.innerHTML = `
-            <td class="p-2">${usuario.nombre}</td>
-            <td class="p-2">${usuario.apellidos}</td>
-            <td class="p-2">${usuario.email}</td>
-            <td class="p-2">${usuario.contraseña}</td>
-            <td class="p-2">${usuario.telefono}</td>
-            <td class="p-2">${usuario.sexo}</td>
-            <td class="p-2 space-x-2">
-                <button class="bg-yellow-400 px-2 py-1 rounded"
-                        onclick="editarUsuario(${index})">
-                    Modificar
-                </button>
-                <button class="bg-red-600 text-white px-2 py-1 rounded"
-                        onclick="eliminarUsuario(${index})">
-                    X
-                </button>
-            </td>
-        `;
+        const rawPassword = usuario.Password || usuario.password || usuario.contraseña || '';
+        const hiddenPassword = rawPassword ? '*'.repeat(rawPassword.length) : '***';
+
+        const sexoDisplay = (usuario.Sexo === 'H' || usuario.sexo === 'H') ? 'Hombre'
+            : (usuario.Sexo === 'M' || usuario.sexo === 'M') ? 'Mujer'
+                : (usuario.Sexo || usuario.sexo || '');
+
+        // Celda Nombre
+        const tdNombre = document.createElement("td");
+        tdNombre.className = "p-2";
+        tdNombre.textContent = usuario.Nombre || usuario.nombre || '';
+        fila.appendChild(tdNombre);
+
+        // Celda Apellidos
+        const tdApellidos = document.createElement("td");
+        tdApellidos.className = "p-2";
+        tdApellidos.textContent = usuario.Apellidos || usuario.apellidos || '';
+        fila.appendChild(tdApellidos);
+
+        // Celda Email
+        const tdEmail = document.createElement("td");
+        tdEmail.className = "p-2";
+        tdEmail.textContent = usuario.Email || usuario.email || '';
+        fila.appendChild(tdEmail);
+
+        // Celda Contraseña
+        const tdContrasena = document.createElement("td");
+        tdContrasena.className = "p-2";
+        tdContrasena.textContent = hiddenPassword;
+        fila.appendChild(tdContrasena);
+
+        // Celda Teléfono
+        const tdTelefono = document.createElement("td");
+        tdTelefono.className = "p-2";
+        tdTelefono.textContent = usuario.Telefono || usuario.telefono || '';
+        fila.appendChild(tdTelefono);
+
+        // Celda Sexo
+        const tdSexo = document.createElement("td");
+        tdSexo.className = "p-2";
+        tdSexo.textContent = sexoDisplay;
+        fila.appendChild(tdSexo);
+
+        // Celda Fecha de Nacimiento
+        const tdFechaNacimiento = document.createElement("td");
+        tdFechaNacimiento.className = "p-2";
+        tdFechaNacimiento.textContent = usuario.FechaNacimiento || usuario.fechaNacimiento || '';
+        fila.appendChild(tdFechaNacimiento);
+
+        // Celda Acciones
+        const tdAcciones = document.createElement("td");
+        tdAcciones.className = "p-2 space-x-2";
+
+        const btnModificar = document.createElement("button");
+        btnModificar.className = "bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500 transition";
+        btnModificar.textContent = "Modificar";
+        btnModificar.onclick = () => editarUsuario(usuario.id);
+        tdAcciones.appendChild(btnModificar);
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.className = "bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition";
+        btnEliminar.textContent = "X";
+        btnEliminar.onclick = () => eliminarUsuario(usuario.id);
+        tdAcciones.appendChild(btnEliminar);
+
+        fila.appendChild(tdAcciones);
 
         tbody.appendChild(fila);
     });
 }
 
-
 function filtrarUsuarios(texto) {
     texto = texto.toLowerCase();
-    const filtrados = usuarios.filter(usuario =>
-        usuario.nombre.toLowerCase().includes(texto) ||
-        usuario.email.toLowerCase().includes(texto)
-    );
+    const filtrados = usuarios.filter(usuario => {
+        const nombre = (usuario.Nombre || usuario.nombre || '').toLowerCase();
+        const email = (usuario.Email || usuario.email || '').toLowerCase();
+        const apellidos = (usuario.Apellidos || usuario.apellidos || '').toLowerCase();
+        return nombre.includes(texto) || email.includes(texto) || apellidos.includes(texto);
+    });
     cargarTabla(filtrados);
 }
 
 window.addEventListener("load", function () {
-    cargarTabla(usuarios);
+    // Si estamos en la página de la tabla, cargamos los usuarios
+    if (document.querySelector("#tablaUsuarios")) {
+        cargarUsuarios();
 
-    const buscador = document.getElementById("buscador");
-    buscador.addEventListener("keyup", function () {
-        const texto = buscador.value.trim();
-        if (texto.length >= 3) {
-            filtrarUsuarios(texto);
-        } else if (texto.length === 0) {
-            cargarTabla(usuarios);
+        const buscador = document.getElementById("buscador");
+        if (buscador) {
+            buscador.addEventListener("keyup", function () {
+                const texto = buscador.value.trim();
+                if (texto.length >= 3) {
+                    filtrarUsuarios(texto);
+                } else if (texto.length === 0) {
+                    cargarTabla(usuarios);
+                }
+            });
         }
-    });
+    }
+
+    // Configurar evento de registro
+    const formRegistro = document.getElementById("formRegistro");
+    if (formRegistro) {
+        formRegistro.addEventListener("submit", registrarUsuario);
+    }
 });
 
+const btnGuardar = document.getElementById("guardar");
+if (btnGuardar) {
+    btnGuardar.onclick = async function () {
+        const formData = new FormData();
+        formData.append("Nombre", document.getElementById("nombre").value);
+        formData.append("Apellidos", document.getElementById("apellidos").value);
+        formData.append("Email", document.getElementById("email").value);
+        formData.append("Password", document.getElementById("contraseña").value);
+        formData.append("Telefono", document.getElementById("telefono").value);
+        formData.append("Sexo", document.getElementById("sexo").value);
+        if (document.getElementById("fechaNacimiento")) {
+            formData.append("FechaNacimiento", document.getElementById("fechaNacimiento").value);
+        }
 
-document.getElementById("guardar").onclick = function () {
-    usuarios[indiceEditar] = {
-        nombre: nombre.value,
-        apellidos: apellidos.value,
-        email: email.value,
-        contraseña: contraseña.value,
-        telefono: telefono.value,
-        sexo: sexo.value
+        try {
+            const response = await fetch(`ws/modificarUsuario.php?id=${idEditar}`, {
+                method: 'POST',
+                body: formData
+            });
+            const json = await response.json();
+
+            if (json.success) {
+                document.getElementById("formEditar").classList.add("hidden");
+                Swal.fire({
+                    title: '¡Actualizado!',
+                    text: 'Usuario modificado correctamente.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    cargarUsuarios(); // Recargar datos
+                });
+            } else {
+                Swal.fire('Error', json.message, 'error');
+            }
+        } catch (error) {
+            console.error("Error al modificar:", error);
+            Swal.fire('Error', 'Hubo un problema de conexión al modificar.', 'error');
+        }
     };
+}
 
-    document.getElementById("formEditar").classList.add("hidden");
-    cargarTabla(usuarios);
-};
+function editarUsuario(id) {
+    idEditar = id;
+    const u = usuarios.find(user => user.id == id);
+    if (!u) return;
 
+    document.getElementById("nombre").value = u.Nombre || u.nombre || '';
+    document.getElementById("apellidos").value = u.Apellidos || u.apellidos || '';
+    document.getElementById("email").value = u.Email || u.email || '';
+    document.getElementById("contraseña").value = u.Password || u.password || u.contraseña || '';
+    document.getElementById("telefono").value = u.Telefono || u.telefono || '';
 
-function editarUsuario(index) {
-    indiceEditar = index;
-    const u = usuarios[index];
+    const sexoDB = u.Sexo || u.sexo || '';
+    document.getElementById("sexo").value = (sexoDB === 'Hombre') ? 'H' : ((sexoDB === 'Mujer') ? 'M' : sexoDB);
 
-    document.getElementById("nombre").value = u.nombre;
-    document.getElementById("apellidos").value = u.apellidos;
-    document.getElementById("email").value = u.email;
-    document.getElementById("contraseña").value = u.contraseña;
-    document.getElementById("telefono").value = u.telefono;
-    document.getElementById("sexo").value = u.sexo;
+    if (document.getElementById("fechaNacimiento")) {
+        document.getElementById("fechaNacimiento").value = u.FechaNacimiento || u.fechaNacimiento || '';
+    }
 
     document.getElementById("formEditar").classList.remove("hidden");
 }
 
+async function eliminarUsuario(id) {
+    const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta acción no se podrá revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    });
 
-function eliminarUsuario(index) {
-    usuarios.splice(index, 1);
-    cargarTabla(usuarios);
+    if (!result.isConfirmed) return;
+
+    try {
+        const response = await fetch(`ws/deleteUsuario.php?id=${id}`);
+        const json = await response.json();
+
+        if (json.success) {
+            Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success');
+            cargarUsuarios();
+        } else {
+            Swal.fire('Error al eliminar', json.message, 'error');
+        }
+    } catch (error) {
+        console.error("Error al eliminar:", error);
+        Swal.fire('Error', 'Hubo un error de conexión al eliminar.', 'error');
+    }
 }
 
+// Registro
+async function registrarUsuario(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    try {
+        const response = await fetch('ws/crearUsuario2.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const text = await response.text();
+        let json;
+        try {
+            json = JSON.parse(text);
+        } catch (err) {
+            console.error("Error parsing JSON:", text);
+            alert("Usuario creado exitosamente.");
+            window.location.href = "tabla.html";
+            return;
+        }
+
+        if (json.email || json.success) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: json.message || 'Usuario creado exitosamente.',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = "tabla.html";
+            });
+        } else {
+            Swal.fire('Error', json.message || "Error al registrar", 'error');
+        }
+
+    } catch (error) {
+        console.error("Error al registrar:", error);
+        Swal.fire('Error', 'Ocurrió un error en la petición.', 'error');
+    }
+}
+
+
 // Cerrar modal con botón
-document.getElementById("cerrarModal").addEventListener("click", cerrarModal);
+const btnCerrarModal = document.getElementById("cerrarModal");
+if (btnCerrarModal) {
+    btnCerrarModal.addEventListener("click", cerrarModal);
+}
 
 // Cerrar modal al hacer clic fuera del contenido
-document.getElementById("formEditar").addEventListener("click", function (e) {
-    const modal = document.getElementById("modalContenido");
-
-    if (!modal.contains(e.target)) {
-        cerrarModal();
-    }
-});
+const formEditar = document.getElementById("formEditar");
+if (formEditar) {
+    formEditar.addEventListener("click", function (e) {
+        const modal = document.getElementById("modalContenido");
+        if (modal && !modal.contains(e.target)) {
+            cerrarModal();
+        }
+    });
+}
 
 function cerrarModal() {
-    document.getElementById("formEditar").classList.add("hidden");
+    const formEditar = document.getElementById("formEditar");
+    if (formEditar) {
+        formEditar.classList.add("hidden");
+    }
 }
