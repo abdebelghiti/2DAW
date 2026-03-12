@@ -4,17 +4,17 @@
 
 <nav class="hidden md:flex gap-8 text-sm font-medium">
     <a
-        href="/"
+        href={import.meta.env.BASE_URL}
         class="text-gray-300 hover:text-cyan-400 transition-colors duration-300"
         >Inicio</a
     >
     <a
-        href="/about"
+        href={`${import.meta.env.BASE_URL}about`}
         class="text-gray-300 hover:text-cyan-400 transition-colors duration-300"
         >Sobre Mí</a
     >
     <a
-        href="/blog"
+        href={`${import.meta.env.BASE_URL}blog`}
         class="text-gray-300 hover:text-cyan-400 transition-colors duration-300"
         >Proyectos</a
     >
