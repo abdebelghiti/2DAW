@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+export async function getStaticPaths() {
+    const allPost = Object.values(
+        import.meta.glob("../posts/*.md", { eager: true }),
+    );
+
+    return [
+        { params: { tag: "astro" }, props: { posts: allPost } },
+        { params: { tag: "exitos" }, props: { posts: allPost } },
+        { params: { tag: "comunidad" }, props: { posts: allPost } },
+        { params: { tag: "blogger" }, props: { posts: allPost } },
+        { params: { tag: "aprendiendo astro" }, props: { posts: allPost } },
+        { params: { tag: "desarrollo" }, props: { posts: allPost } },
+    ];
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const filteredPost = posts.filter((post: any) =>
+    post.frontmatter.tags?.includes(tag),
+);
+---
+
+<BaseLayout pageTitle="{tag}">
+    <p>Posts tagged with {tag}</p>
+    <ul>
+        {
+            filteredPost.map((post: any) => (
+                <li>
+                    <a href={post.url}>{post.frontmatter.tags}</a>
+                </li>
+            ))
+        }
+    </ul>
+</BaseLayout>

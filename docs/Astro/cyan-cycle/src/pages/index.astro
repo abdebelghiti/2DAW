@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Inicio";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+	<section
+		id="hero"
+		class="relative overflow-hidden pt-20 pb-32 flex flex-col items-center justify-center text-center"
+	>
+		<div
+			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-600/20 rounded-full blur-[100px] -z-10"
+		>
+		</div>
+
+		<img
+			src="https://media.licdn.com/dms/image/v2/D4D03AQHQXfhXE2Orrg/profile-displayphoto-shrink_800_800/B4DZRCOvIxG4Ac-/0/1736277947440?e=1775088000&v=beta&t=P0X_um7gUDx-o2ALrA1TljVcQHjwFdz5PIBqAdQbgp4"
+			alt="Foto de perfil de Abde"
+			class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mb-6 border-4 border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:scale-105 transition-transform duration-300"
+		/>
+		<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+			Hola, soy <span
+				class="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-500"
+				>Abde</span
+			>
+		</h1>
+		<p class="text-xl md:text-2xl text-gray-400 max-w-2xl mb-12">
+			Desarrollador web, estudiante de 2DAW en EFA El Campico.
+		</p>
+
+		<div class="flex flex-col sm:flex-row gap-4">
+			<a
+				href="/blog"
+				class="px-8 py-3 rounded-full bg-cyan-500 text-gray-950 font-bold hover:bg-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+			>
+				Ver mis proyectos
+			</a>
+			<a
+				href="/about"
+				class="px-8 py-3 rounded-full bg-gray-900 border border-gray-700 text-white font-semibold hover:border-cyan-500/50 hover:bg-gray-800 transition-all duration-300"
+			>
+				Sobre mí
+			</a>
+		</div>
+	</section>
+</BaseLayout>
