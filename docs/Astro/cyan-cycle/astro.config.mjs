@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
     site: 'https://abdebelghiti.github.io',
-    base: '/2DAW/',
+    base: '/2DAW/dist/',
     vite: {
         plugins: [tailwindcss()],
     },
