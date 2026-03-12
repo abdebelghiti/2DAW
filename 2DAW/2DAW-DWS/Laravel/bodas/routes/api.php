@@ -8,6 +8,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
 Route::get('/invitados', [InvitadoController::class, 'getInvitados'])->middleware(islogged:class);
 Route::post('/invitados', [InvitadoController::class,'createInvitado'])->middleware(islogged:class);
 Route::put('/invitados', [InvitadoController::class,'replaceInvitado'])->middleware(islogged:class);
