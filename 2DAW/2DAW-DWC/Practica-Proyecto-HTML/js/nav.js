@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", "nav.html", true);
 
     xhr.onreadystatechange = function () {

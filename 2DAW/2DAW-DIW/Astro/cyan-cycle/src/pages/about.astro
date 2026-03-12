@@ -1,26 +1,68 @@
 ---
-const pageTitle = "About me";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Sobre Mí";
 const identity = {
-    nombre: "Abde",
-    pais: "España",
-    profesion: "Profesor",
-    hobbies: ["Fútbol","Padel"]
+	nombre: "Abde",
+	pueblo: "Almoradí",
+	provincia: "Alicante",
+	pais: "España",
+	profesion: "Programador",
+	hobbies: ["Fútbol", "Baloncesto", "Videojuegos"],
 };
 
-const skills = ["CSS","Figma","Astro"];
+const skills = [
+	"HTML/CSS",
+	"JavaScript",
+	"Astro",
+	"TailwindCSS",
+	"Figma",
+	"React",
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-		<h2>Este es el about</h2>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+	<section class="max-w-3xl mx-auto py-12">
+		<h1 class="text-4xl md:text-5xl font-bold mb-8">
+			<span class="text-cyan-400">Sobre</span> Mí
+		</h1>
+
+		<div class="prose prose-invert prose-lg text-gray-400 space-y-6 mb-12">
+			<p>
+				¡Hola! Me llamo <strong>{identity.nombre}</strong>. Vivo en {
+					identity.pueblo
+				}, {identity.provincia}, {identity.pais} y trabajo como <strong
+					>{identity.profesion}</strong
+				>.
+			</p>
+			<p>
+				Me apasiona el desarrollo web y el diseño de interfaces limpias,
+				modernas y funcionales. Disfruto compartiendo mis conocimientos
+				y construyendo herramientas que aportan valor.
+			</p>
+			<p>
+				Cuando no estoy programando, mis hobbies incluyen:
+				<ul class="list-disc list-inside mt-2 text-gray-300">
+					{identity.hobbies.map((hobby) => <li>{hobby}</li>)}
+				</ul>
+			</p>
+		</div>
+
+		<div>
+			<h2
+				class="text-2xl font-bold text-white mb-6 flex items-center gap-2"
+			>
+				Habilidades <span class="w-12 h-px bg-cyan-500/50 inline-block"
+				></span>
+			</h2>
+			<div class="flex flex-wrap gap-3">
+				{
+					skills.map((skill) => (
+						<span class="px-4 py-2 border border-gray-800 rounded-lg bg-gray-900 text-cyan-50 text-sm font-medium shadow-sm hover:border-cyan-500/40 hover:text-cyan-400 transition-colors">
+							{skill}
+						</span>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</BaseLayout>

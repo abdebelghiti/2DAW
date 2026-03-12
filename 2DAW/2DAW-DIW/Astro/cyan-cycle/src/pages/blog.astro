@@ -1,45 +1,93 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const allPost = Object.values(
-	import.meta.glob("./posts/*.md", { eager: true }),
-);
-const pageTitle = "Blog";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const pageTitle = "Proyectos";
+
+const projects = [
+	{
+		title: "App Valorant",
+		description:
+			"Aplicación construida como proyecto de 2DAW, enfocada el uso de APIs y diseñada en TailWindCSS.",
+		url: "https://abdebelghiti.github.io/2DAW/index.html",
+		tech: ["HTML", "TailwindCSS", "JavaScript"],
+	},
+	{
+		title: "Web Banda (La Raíz)",
+		description: "Sitio web dedicado a la banda de música 'La Raíz'.",
+		url: "http://localhost/2DAW/2DAW-DIW/La%20raiz/la-raiz.html",
+		tech: ["HTML", "TailwindCSS"],
+	},
+	{
+		title: "YouTube Clone (Sass)",
+		description:
+			"Práctica de maquetación del diseño de YouTube utilizando el preprocesador Sass para los estilos.",
+		url: "http://localhost/2DAW/2DAW-DIW/Practica-Sass/inicio.html",
+		tech: ["HTML", "Sass", "CSS"],
+	},
+];
+
+const allPosts = await Astro.glob("./posts/*.md");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<h2>Esta es la página de blog</h2>
-	<ul>
-		{
-			allPost.map((post: any) => (
-				<li>
-					<a href={post.url}>{post.frontmatter.title}</a>
-				</li>
-			))
-		}
-	</ul>
+	<section class="py-12">
+		<div class="mb-12">
+			<h1 class="text-4xl md:text-5xl font-bold mb-4">
+				Mis <span class="text-cyan-400">Proyectos</span>
+			</h1>
+			<p class="text-xl text-gray-400 max-w-2xl">
+				Una selección de mis proyectos recientes, para mis asignaturas
+				de 2DAW.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				projects.map((project) => (
+					<ProjectCard
+						title={project.title}
+						description={project.description}
+						url={project.url}
+						tech={project.tech}
+					/>
+				))
+			}
+		</div>
+
+		<div class="mt-20 pt-10 border-t border-gray-800">
+			<h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+				Artículos del <span class="text-cyan-400">Blog</span>
+				<span class="h-px bg-cyan-900 flex-1 ml-4 rounded-full"></span>
+			</h2>
+			<div class="space-y-4">
+				{allPosts.map((post) => (
+					<a href={post.url} class="group block p-6 border border-gray-800 bg-gray-900/40 rounded-xl hover:bg-gray-800/80 hover:border-cyan-500/50 transition-all duration-300">
+						<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+							<div class="space-y-1">
+								<h3 class="text-xl text-gray-200 font-semibold group-hover:text-cyan-400 transition-colors">
+									{post.frontmatter.title}
+								</h3>
+								<p class="text-gray-400 text-sm">
+									{post.frontmatter.description}
+								</p>
+							</div>
+							<div class="flex flex-col sm:items-end gap-2">
+								<span class="text-xs font-mono text-gray-500 shrink-0">
+									{post.frontmatter.pubDate.toString().slice(0, 10)}
+								</span>
+								<div class="flex gap-2">
+									{post.frontmatter.tags && post.frontmatter.tags.map((tag: string) => (
+										<span class="text-[10px] uppercase font-bold text-cyan-500 bg-cyan-950/50 px-2 py-0.5 rounded-sm border border-cyan-900/50">
+											{tag}
+										</span>
+									))}
+								</div>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
 </BaseLayout>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-		<h2>Esta es la página de blog</h2>
-
-		<ul>
-			<li><a href="/posts/post-1.md"></a>Post 1</li>
-			<li><a href="/posts/post-2.md"></a>Post 2</li>
-			<li><a href="/posts/post-3.md"></a>Post 3</li>
-		</ul>
-
-		<article>
-			<h4>Hola</h4>
-			<p>Esto es un articulo del blog</p>
-		</article>
-	</body>
-</html>

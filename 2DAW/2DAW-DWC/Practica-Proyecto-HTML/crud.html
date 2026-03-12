@@ -12,6 +12,9 @@
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Main JS -->
+    <script src="js/main.js" defer></script>
+
     <!-- Navbar dinámico -->
     <script src="js/nav.js" defer></script>
 </head>
@@ -116,100 +119,6 @@
             </fieldset>
         </form>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-
-            if (!id) {
-                alert("No se ha especificado un ID de usuario.");
-                return;
-            }
-
-            // Cargar datos
-            try {
-                const res = await fetch(`ws/getUsuario.php?id=${id}`);
-                const json = await res.json();
-                if (json.success && json.data) {
-                    const u = json.data;
-                    document.getElementById('crudNombre').value = u.Nombre || u.nombre || '';
-                    document.getElementById('crudApellidos').value = u.Apellidos || u.apellidos || '';
-                    document.getElementById('crudEmail').value = u.Email || u.email || '';
-                    document.getElementById('crudPassword').value = u.Password || u.password || u.contraseña || '';
-                    document.getElementById('crudTelefono').value = u.Telefono || u.telefono || '';
-                    if (document.getElementById('crudFechaNacimiento')) document.getElementById('crudFechaNacimiento').value = u.FechaNacimiento || u.fechaNacimiento || '';
-
-                    if (u.Sexo === 'H' || u.sexo === 'H' || u.Sexo === 'Hombre' || u.sexo === 'Hombre') document.getElementById('crudSexoH').checked = true;
-                    if (u.Sexo === 'M' || u.sexo === 'M' || u.Sexo === 'Mujer' || u.sexo === 'Mujer') document.getElementById('crudSexoM').checked = true;
-                } else {
-                    Swal.fire('Error al cargar', json.message, 'error');
-                }
-            } catch (e) {
-                console.error(e);
-            }
-
-            // Guardar cambios
-            document.getElementById('formCrud').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                try {
-                    const res = await fetch(`ws/modificarUsuario.php?id=${id}`, {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const json = await res.json();
-                    if (json.success) {
-                        Swal.fire({
-                            title: '¡Modificado!',
-                            text: 'Usuario modificado correctamente.',
-                            icon: 'success',
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(() => {
-                            window.location.href = 'tabla.html';
-                        });
-                    } else {
-                        Swal.fire('Error', json.message, 'error');
-                    }
-                } catch (e) {
-                    console.error(e);
-                    Swal.fire('Error', 'Hubo un error de conexión.', 'error');
-                }
-            });
-
-            // Eliminar
-            document.getElementById('btnEliminarCrud').addEventListener('click', async () => {
-                const result = await Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "Esta acción no se podrá revertir",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                });
-
-                if (!result.isConfirmed) return;
-
-                try {
-                    const res = await fetch(`ws/deleteUsuario.php?id=${id}`);
-                    const json = await res.json();
-                    if (json.success) {
-                        Swal.fire('Eliminado!', 'Usuario eliminado correctamente.', 'success').then(() => {
-                            window.location.href = 'tabla.html';
-                        });
-                    } else {
-                        Swal.fire('Error', json.message, 'error');
-                    }
-                } catch (e) {
-                    console.error(e);
-                    Swal.fire('Error', 'Hubo un error de conexión al eliminar.', 'error');
-                }
-            });
-        });
-    </script>
 
 </body>
 

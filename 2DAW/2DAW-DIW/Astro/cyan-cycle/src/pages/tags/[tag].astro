@@ -10,7 +10,7 @@ export async function getStaticPaths() {
         { params: { tag: "exitos" }, props: { posts: allPost } },
         { params: { tag: "comunidad" }, props: { posts: allPost } },
         { params: { tag: "blogger" }, props: { posts: allPost } },
-        { params: { tag: "aprendiendo astro" }, posts: { post: allPost } },
+        { params: { tag: "aprendiendo astro" }, props: { posts: allPost } },
         { params: { tag: "desarrollo" }, props: { posts: allPost } },
     ];
 }
